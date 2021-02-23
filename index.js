@@ -5,6 +5,7 @@ const app = express();
 const cors = require('cors');
 const { dbConnection } = require('./database/config');
 
+
 //Base de datos
 dbConnection();
 
@@ -12,16 +13,13 @@ dbConnection();
 //middleware
 //Configurar Cors
 app.use(cors());
+app.use( express.json())
+app.use( express.urlencoded({ extended: false }))
 
 
 //rutas
-app.get('/',(req,res)=>{
-
-    res.json({
-        ok:true,
-        message:'Hola Mundo'
-    })
-});
+app.use('/api/usuarios',require('./routes/usuarios.routes'));
+app.use('/api/login', require('./routes/auth.routes'));
 
 
 
