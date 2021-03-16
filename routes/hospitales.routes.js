@@ -21,7 +21,9 @@ router.post('/',[
  
  
  router.put('/:id',[
-
+   validarJWT,
+   check('id','No es un id de mongo').isMongoId(),
+   check('nombre', 'El nombre es necesario').not().isEmpty(),
     validaCampos
  ],actualizarHospitales);
 

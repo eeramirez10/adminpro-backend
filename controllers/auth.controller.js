@@ -27,7 +27,7 @@ controller.login = async ( req ,res= response)=>{
         })
     } 
 
-    
+  
 
     let token = await generarJWT(usuarioDB.id);
 
@@ -35,8 +35,27 @@ controller.login = async ( req ,res= response)=>{
 
     res.json({
         ok: true,
+        token,
+        
+    })
+}
+
+
+
+
+controller.renewToken = async (req,res)=>{
+
+    const uid = req.uid
+  
+    const token = await generarJWT(uid)
+
+
+    res.json({ 
+        ok:true,
+        uid,
         token
     })
+
 }
 
 

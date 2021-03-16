@@ -6,8 +6,10 @@ const express = require('express')
 const router = express.Router()
 const { check } = require('express-validator');
 
-const { login } = require('../controllers/auth.controller');
+const { login, renewToken } = require('../controllers/auth.controller');
 const { validaCampos } = require('../middlewares/valida-campos')
+
+const { validarJWT } = require('../middlewares/validar-jwt')
 
 router.post('/',[ 
 
@@ -17,7 +19,9 @@ router.post('/',[
     check('email','Ese no es un email correcto').isEmail(),
     validaCampos
 
-],login)
+],login);
+
+router.get ('/renew',validarJWT, renewToken);
 
 
 
